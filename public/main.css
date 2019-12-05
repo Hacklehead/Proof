@@ -1,0 +1,370 @@
+header {
+  background-color: #f2f2f2;
+  padding: 2px;
+  text-align: center;
+  font-size: 24px;
+  color: #000080;
+  border: 1px solid #ddd;
+  font-family: arial;  
+}
+
+
+nav {
+  float: left;
+  width: 50%;
+  padding: 20px;
+  height: 500px;
+  border: 1px solid #ddd;
+}
+
+article {
+  float: left;
+  padding: 20px;
+  width: 50%;
+  background-color: #f1f1f1;
+  height: 500px; /* only for demonstration, should be removed */
+}
+
+section:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+thead.fixedHeader tr {
+	position: relative;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 10px 12px 10px 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myTable_h {
+  border-collapse: collapse;
+  font-size: 14px;
+  font-family: arial;
+  border: 1px solid #ddd;
+}
+
+#myTable_h th td {
+  text-align: center;
+  padding: 4px;
+}
+
+#myTable_h tr.header {
+  background-color: #000080;
+  color: white;
+}
+
+
+#myTable_2 {
+  border-collapse: collapse;
+  
+  font-size: 14px;
+  font-family: arial;
+  border: 1px solid #ddd;
+}
+
+#myTable_2 th, #myTable_2 td {
+  text-align: left;
+  padding: 4px;
+  border: 1px solid #ddd;
+}
+
+#myTable_2 td.right {
+  text-align: right;
+  padding: 4px;
+  border: 1px solid #ddd;
+}
+
+#myTable_2 td.center {
+  text-align: center;
+  padding: 4px;
+  border: 1px solid #ddd;
+}
+
+#myTable_2 tr.header {
+  background-color: #000080;
+  color: white;
+}
+
+#myTable_2 tr:hover {
+  background-color: #7979d2;
+  color: white;
+}
+
+#myTable_2 {
+    border-collapse: collapse;
+    
+}
+
+#myTable_2 th, td {
+    text-align: center;
+    padding: 4px;
+}
+
+#myTable_2 tr:nth-child(even) {background-color: #f2f2f2;}
+
+.btn-group button {
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  font-weight: bold;
+}
+
+.btn-group2 button {
+  background-color: white; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: #4CAF50; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+  font-weight: bold;
+}
+
+thead.fixedHeader tr {
+	position: relative;
+}
+
+html>body tbody.scrollContent {
+	display: block;
+	height: 380px;
+	overflow: auto;
+	width: 100%
+}
+
+html>body thead.fixedHeader {
+	display: table;
+	overflow: auto;
+	width: 100%
+}
+
+/* define height and width of scrollable area. Add 16px to width for scrollbar          */
+div.tableContainer {
+	clear: both;
+	border: 1px solid #963;
+	height: 285px;
+	overflow: auto;
+	width: 900px
+}
+
+/* Reset overflow value to hidden for all non-IE browsers. */
+html>body div.tableContainer {
+	overflow: hidden;
+	width: 900px
+}
+
+/* define width of table. IE browsers only                 */
+div.tableContainer table {
+	float: left;
+	/* width: 740px */
+}
+
+/* define width of table. Add 16px to width for scrollbar.           */
+/* All other non-IE browsers.                                        */
+html>body div.tableContainer table {
+	/* width: 756px */
+}
+
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.column20 {
+  float: left;
+  width: 20.00%;
+  padding: 5px;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+fieldset {
+  font-size:16px;
+  padding:10px;
+  width:500px;
+  line-height:1.8;
+  font-family: arial;
+  }
+  
+<style>
+
+
+buttony {
+
+  background-color: #4CAF50; /* Green */
+
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  
+  cursor: pointer;
+
+}
+
+.button2 {
+  background-color: rgb(12, 87, 180);
+  color: white;
+  border: 2px solid rgb(12, 87, 180);
+  width: 250px;
+}
+
+.button2:hover {
+  background-color: white;
+  color: black;
+}
+
+.button2 {padding: 2px 14px;}
+
+
+.button22 {
+  background-color: #4CAF50;
+  color: white;
+  border: 2px solid #4CAF50;
+  width: 250px;
+}
+
+.button22:hover {
+  background-color: white;
+  color: black;
+}
+
+.button22 {padding: 2px 14px;}
+
+
+.button3 {
+
+  background-color: #4CAF50;
+  color: white;
+  border: 2px solid #4CAF50;
+  width: 250px;
+  height: 35px;
+  font-size: 16px;
+}
+ 
+
+.button3:hover {
+  background-color: white;
+  color: black;
+}
+
+.button3 {padding: 2px 14px;}
+
+button:disabled {
+  background-color:hsl(0, 0%, 80%);
+}
+
+.button33 {
+
+  background-color: #4CAF50;
+  color: white;
+  border: 2px solid #4CAF50;
+  width: 300px;
+  height: 35px;
+  font-size: 16px;
+}
+ 
+.button33:hover {
+  background-color: white;
+  color: black;
+}
+
+.button33 {padding: 2px 4px;}
+
+
+.button4 {
+  background-color: #000080;
+  color: white;
+  border: 2px solid lightsteelblue;
+  width: 250px;
+  height: 31px;
+  font-size: 16px;
+}
+
+.button4:hover {
+  background-color: white;
+  color: black;
+}
+
+.button4 {padding: 2px 14px;}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content */
+  .modal-content {
+  background-color: rgb(250,250,250);
+  margin: auto;
+  padding: 10px;
+  border: 3px solid black;
+  width: 40%;
+  }
+  
+  
+  
+  .modal-header {
+  padding: 2px 12px;
+  background-color: #000080;
+  color: white;
+  }
+  
+  .modal-body {padding: 2px 0px;}
+  
+  .modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+  }
+  /* The Close Button */
+.close {
+  color: yellow;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+  color: cyan;
+  text-decoration: none;
+  cursor: pointer;
+  }
