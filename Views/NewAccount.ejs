@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+
+<head>
+
+<style>
+p.ex1 {
+	margin-bottom: 2px;
+  }
+</style>
+
+<script>
+
+function seteuserid() {
+ var input, email;
+
+  input = document.getElementById("userid");
+  //email = input.value;
+  //sessionStorage['myemail'] = input.value;
+  //document.cookie = "username=John Doe";
+  
+  sessionStorage.userid = input.value;
+  //alert(sessionStorage.email);
+}
+
+function mySubmit2(){
+
+var x=document.getElementById("userid").value;
+var y=document.getElementById("email").value;
+var z=document.getElementById("password").value;
+var z2=document.getElementById("password2").value;
+
+sessionStorage.userid = x;
+sessionStorage.email = y;
+sessionStorage.password = z;
+
+if(z != z2)	{alert('Passwords do not match! Please re-enter');}
+
+}
+
+function mySubmit() {
+
+var x=document.getElementById("userid").value;
+var y=document.getElementById("email").value;
+var z=document.getElementById("password").value;
+var z2=document.getElementById("password2").value;
+
+sessionStorage.userid = x;
+sessionStorage.email = y;
+sessionStorage.password = z;
+
+document.getElementById("myNewAccountForm").submit();
+}
+
+function myLoad() {
+
+//alert(sessionStorage.userid);
+
+document.getElementById("userid").value=sessionStorage.userid;
+document.getElementById("email").value=sessionStorage.email;
+document.getElementById("password").value=sessionStorage.password;
+
+}
+
+</script>
+</head>
+<link rel="stylesheet" href="main.css">
+<link rel="icon" href="ps32.gif" type="image/gif" sizes="32x32">
+
+<body onload="myLoad()">
+
+<div class="row">
+	<div class="column" style="border-top: 1px solid #ddd;font-family: arial; font-size: 24px; text-align: left; height:32px; background-color:#f2f2f2; color: #000080; padding: 4px 5px 2px 4px;">
+	  <img src="PequaSoft.png" alt="Forest" style="width:125px">
+	</div>
+	<div class="column" style="border-top: 1px solid #ddd;font-family: arial; font-size: 24px; text-align: center; height:32px; background-color:#f2f2f2; color: #000080; padding: 4px 5px 2px 4px;">
+	  <strong>Add New Account</strong>
+	</div>
+	<div class="column" style="border-top: 1px solid #ddd;font-family: arial; font-size: 16px; text-align: right; height:32px; background-color:#f2f2f2; color: #000080; padding: 4px 5px 2px 4px;">
+  
+	</div>
+  </div> 
+
+  <br><br><br>
+
+<form action="/newaccount" method="POST"  id="myNewAccountForm" >
+	<fieldset style="width: 580px;">
+		<legend>Add new Account</legend>
+			<div style="float: left; width: 220px;" >	
+			<label style="color: black; font-family: arial;">User ID: </label><br />
+			<p class="ex1"><label style="color: black; font-family: arial;">Email: </label><br /></p>
+			<p class="ex1"><label style="color: black; font-family: arial;">Password: </label><br /></p>
+			<p class="ex1"><label style="color: black; font-family: arial;">Retype Password: </label><br /></p>
+			</div>	
+
+		<div style="float: left; width: 150px;" >	
+			<input type="text" size="40" placeholder="Type your user id" id="userid"  name="userid" onkeyup="setuserid()"><br />
+			<p class="ex1"><input type="text" size="40" placeholder="Type your email" id="email"  name="email" ><br /></p>
+			<p class="ex1"><input type="password" size="40" placeholder="Type your password"  name="password" id="password"><br /></p>
+			<p class="ex1"><input type="password" size="40" placeholder="Retype your password"  name="password2" id="password2"><br /></p>
+		</div>
+	<br><br><br><br><br><br><br>
+</form>
+ 
+  <div style="float: left; width: 150px;" class="btn-group" >
+    <button class="buttony button2" style="float: left; width: 150px;" onclick="mySubmit2()" >Submit</button>
+  </div>
+</fieldset>
+
+
+</body>
+</html>
+
+
+
