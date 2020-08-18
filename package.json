@@ -1,0 +1,24 @@
+{
+  "name": "node-sample",
+  "description": "Our sample Node to Heroku app",
+  "main": "server.js",
+  "scripts": {
+    "build": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "alphavantage": "^2.0.1",
+    "axios": "^0.19.2",
+    "big-number": "^2.0.0",
+    "body-parser": "^1.19.0",
+    "connect-multiparty": "^2.2.0",
+    "cors": "^2.8.5",
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "now": "^16.6.1",
+    "tedious": "^6.6.2",
+    "tedious-connection-pool": "^1.0.5",
+    "yahoo-finance": "^0.3.6"
+  }
+}

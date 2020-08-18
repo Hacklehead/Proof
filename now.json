@@ -1,0 +1,142 @@
+{
+  "version": 2,
+  "builds": [{ "src": "server.js", "use": "@now/node-server" }],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/server.js",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/data",
+      "dest": "/server.js",
+      "methods": ["GET"]
+    },    
+    {
+      "src": "/xindexlist",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/xtechlist",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },    
+    {
+      "src": "/loadindex",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },        
+    {
+      "src": "/loadindexone",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },            
+    {
+      "src": "/xquote",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },        
+    {
+      "src": "/xhistorical",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },        
+    {
+      "src": "/adduser",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },                
+    {
+      "src": "/xintraday",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },        
+    {
+      "src": "/xforex",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },                
+    {
+      "src": "/xsector",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },                    
+    {
+      "src": "/xtechnical",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },                        
+    {
+      "src": "/xcurrency",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },                            
+    {
+      "src": "/xsearch",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },                            
+    {
+      "src": "/ysearch",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },                                
+    {
+      "src": "/indexadd",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },                                    
+    {
+      "src": "/indexdelete",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },                                        
+    {
+      "src": "/loanadd",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },    
+    {
+      "src": "/loancopy",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },    
+    {
+      "src": "/loandelete",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/profileadd",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/profileupdate",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },    
+    {
+      "src": "/loanupdate",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/loadprofile",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },        
+    {
+      "src": "/loaduid",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/loadloans",
+      "dest": "/server.js",
+      "methods": ["POST"]
+    }                    
+  ]
+  
+}
