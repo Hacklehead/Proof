@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+
+  <link rel="stylesheet" href="main.css">  
+  <link rel="icon" href="ps32.gif" type="image/gif" sizes="32x32">
+
+<style>
+
+
+fieldset {
+    background-color: #f2f2f2;
+    width: 640px;
+    border: 1px solid black;   
+    text-align:left;
+}
+
+.fieldset_center {
+    background-color: #f2f2f2;
+    width: 640px;
+    border: 1px solid black;   
+    text-align:center;
+}
+
+
+.button {
+    border: 1px solid black;   
+    width: 200px;
+    height: 24px;
+    background-color: #008CBA;
+    color: white;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: #2196F3;
+}
+
+.grid-item {
+  background-color: #f2f2f2;
+  padding: 1px;
+  font-size: 16px;
+  text-align: center;
+}
+
+</style>
+
+<title>Quick Loan Calculator</title>
+</head>
+
+<body onload="myLoad()">
+
+  <div class="row">
+    <div class="column" style="border-top: 1px solid #ddd;font-family: arial; font-size: 24px; text-align: left; height:32px; background-color:#f2f2f2; color: #000080; padding: 4px 5px 2px 4px;">
+      <img src="PequaSoft.gif" alt="Forest" style="width:125px">
+    </div>
+    <div class="column" style="border-top: 1px solid #ddd;font-family: arial; font-size: 24px; text-align: center; height:32px; background-color:#f2f2f2; color: #000080; padding: 4px 5px 2px 4px;">
+      <strong>Quick Loan Calculator</strong>
+    </div>
+    <div class="column" style="border-top: 1px solid #ddd;font-family: arial; font-size: 16px; text-align: right; height:32px; background-color:#f2f2f2; color: #000080; padding: 4px 5px 2px 4px;">
+      <label style="color: blue" >User ID: </label><label id="viewUID" style="color: black" >...</label>
+    </div>
+  </div>
+
+  
+    <div style="height:35px; background-color:#000080; padding: 2px 5px 2px 5px;">
+      <button id="GoToBackOffice" class="buttony button4" style="float: left; width: 250px; margin-right: 25px;" onclick="window.location.href='/Mainmenu'" ><strong>Main Menu</strong></button>
+      <form action="/LoanMaster" method="POST" id="myMenuForm">
+        <input type="text" size="40" placeholder="Type your userid" id="userid" name="userid" hidden>
+        <button id="GoToBackOffice" class="buttony button4" style="float: left; width: 250px; " onclick="goToLoanMaster()" ><strong>Loan Master</strong></button>
+      </form>>  
+    </div>
+  </form>
+<p ></p>
+
+<fieldset class="fieldset">
+  <div style="float: left; width: 50%; padding-left: 30px;" >	
+    <label style="color: black; font-family: arial;">Loan Principal: </label><br />
+    <label style="color: black; font-family: arial;">Rate: </label><br />
+    <label style="color: black; font-family: arial;">Num of Payments: </label><br />
+    <label style="color: black; font-family: arial;">Payment: </label><br />
+    </div>	
+    <div style="float: left; width: 50%; padding-left: 30px;" >	
+      <input type="text" id="text1" style="width: 250px;" placeholder="Principal..." ><br />
+      <input type="text" id="text2" style="width: 153px;" placeholder="Rate..." >
+      <select name="rateperiod" id="rateperiod" >
+        <option value="12">per Year</option>
+        <option value="3">per Month</option>
+        <option value="1">per Quarter</option>
+      </select><br />
+      <input type="text" id="text3"   style="width: 205px;" placeholder="# of Payments..." readonly>
+      <button class="buttony button22"  style="width: 40px; height: 22px; " id="button1" onclick="doPopup()"><strong>...</strong></button>
+      <br />
+
+      <input type="text" id="text4" style="width: 250px;" placeholder="Payment..." ><br />
+     
+		</div>
+
+</fieldset>
+
+
+<fieldset >
+  <legend>Calculation Options</legend>
+
+  <div class="grid-container">
+      <div class="grid-item"><button class="buttony button3" id="button1" onclick="calcPmt()"><strong>Calculate Payment</strong></button> </div>
+      <div class="grid-item"><button class="buttony button3" id="button2" onclick="calcPrinc()"><strong>Calculate Principal</strong></button> </div>
+      <div class="grid-item"><button class="buttony button3" id="button3" onclick="calcRate()"><strong>Calculate Rate</strong></button> </div>  
+      <div class="grid-item"><button class="buttony button3" id="button4" onclick="calcNumPmts()"><strong>Calculate Number of Pmts</strong></button> </div>
+    </div>  
+    
+</fieldset>
+
+<div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+    <span class="close">&times;</span>
+    <h2 style="font-family:arial;">Number of Payments</h2>
+    </div>
+    <br>
+    <div class="modal-body">
+    <div class="row">
+      <div class="column" >
+          <p><label id="rundate" style="font-family:arial; padding-bottom: 10px;" for="demo">Number of Years:</label><br></p>
+          <p></p><label id="rundate" style="font-family:arial;" for="demo">Payments Per Year:</label><br></p>
+          <label id="rundate" style="font-family:arial;" for="demo">Number of Payments:</label> 
+      </div> 
+      <div class="column"  style="padding-bottom: 3px;">
+          <p><input type="text" id="text5" onkeyup="CalcModalNumPmts()" name="num_years" style="width:175px;"><br></p>
+          <p><select name="pmtperyear" id="pmtperyear" onchange="CalcModalNumPmts()" style="width:175px;" >
+            <option value="12">Monthly</option>  
+            <option value="4">Quarterly</option>
+            <option value="1">Annual</option>  
+            </select><br></p>
+            <input type="text" id="text6" name="num_pmts" style="width:175px;">
+      </div>
+    </div><br><br>
+  </div>
+  <button class="buttony button3" id="sendbackpmts" onclick="SendBackPmts(1)"><strong>Submit</strong></button>
+  <button class="buttony button3" id="sendbackpmts" onclick="SendBackPmts(0)"><strong>Cancel</strong></button><br>
+  </div>
+</div>
+
+<script src="loancalc.js"></script>
+<script>
+    //alert(mymodule.test());
+</script>
+
+<script src="accounting.js"></script>
+<script src="LoanCalc.js"></script>
+
+<script>
+
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0];
+
+function doPopup() {
+  modal.style.display = "block";
+}
+ 
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+function CalcModalNumPmts() {
+  var numYears = accounting.unformat(document.getElementById("text5").value);
+  var pmtperyear =document.getElementById("pmtperyear").value;
+  var totalpmts=numYears*pmtperyear;
+  document.getElementById("text6").value =totalpmts;
+}
+
+function SendBackPmts(parSwitch) {
+  if (parSwitch == 1){
+    var pp = document.getElementById("pmtperyear").value;
+    var buff;
+    if (pp == 1){buff = ' (Annual)';}
+    if (pp == 4){buff = ' (Quarterly)';}
+    if (pp == 12){buff = ' (Monthly)';}
+
+    document.getElementById("text3").value = document.getElementById("text6").value + buff;
+    }
+  modal.style.display = "none";
+}
+
+
+function calcPmt() {
+var divisor;
+divisor=1;
+
+divisor =document.getElementById("rateperiod").value;
+
+var pp = document.getElementById("pmtperyear").value;
+var multiplier;
+if (pp == 1){multiplier = 12;}
+if (pp == 4){multiplier = 3;}
+if (pp == 12){multiplier = 1;}
+
+divisor=divisor/multiplier;
+
+var princ = accounting.unformat(document.getElementById("text1").value);
+var rate = (accounting.unformat(document.getElementById("text2").value) / divisor) / 100;
+var num_pmts =accounting.unformat(document.getElementById("text3").value);
+
+//alert(divisor);
+
+if (princ == 0) { alert("Missing Principal"); return;}
+if (rate == 0) { alert("Missing Rate"); return;}
+if (num_pmts == 0) { alert("Missing number of Payments"); return;}
+
+//pmt = getPmt(princ,rate,num_pmts);
+ 
+pmt = mymodule.getPmt(princ,rate,num_pmts);
+
+document.getElementById("text1").value = accounting.formatNumber(princ,2);
+document.getElementById("text2").value = accounting.formatNumber((rate*divisor)*100,4);
+document.getElementById("text4").value = accounting.formatNumber(pmt,2);
+
+}
+
+function calcPrinc() {
+var divisor;
+divisor=1;
+
+divisor =document.getElementById("rateperiod").value;
+
+var pp = document.getElementById("pmtperyear").value;
+var multiplier;
+if (pp == 1){multiplier = 12;}
+if (pp == 4){multiplier = 3;}
+if (pp == 12){multiplier = 1;}
+
+divisor=divisor/multiplier;
+
+var rate = (accounting.unformat(document.getElementById("text2").value) / divisor) / 100;
+var num_pmts =accounting.unformat(document.getElementById("text3").value);
+var pmt =accounting.unformat(document.getElementById("text4").value);
+
+if (pmt == 0) { alert("Missing Payment"); return;}
+if (rate == 0) { alert("Missing Rate"); return;}
+if (num_pmts == 0) { alert("Missing number of Payments"); return;}
+
+//var princ = pmt * ((Math.pow(1 + rate, num_pmts)-1 ) / (rate * Math.pow(1 + rate, num_pmts)))
+
+var princ = mymodule.getPrinc(pmt,rate,num_pmts);
+
+document.getElementById("text1").value = accounting.formatNumber(princ,2);
+document.getElementById("text2").value = accounting.formatNumber((rate*divisor)*100,4);
+//document.getElementById("text3").value = accounting.formatNumber(num_pmts);
+document.getElementById("text4").value = accounting.formatNumber(pmt,2);
+
+}
+
+function calcRate() {
+var i=0,t_pmt=0;
+var t_rate=10;
+var step=2;
+var direction="down";
+
+var divisor;
+divisor=1;
+
+divisor =document.getElementById("rateperiod").value;
+var pp = document.getElementById("pmtperyear").value;
+var multiplier;
+if (pp == 1){multiplier = 12;}
+if (pp == 4){multiplier = 3;}
+if (pp == 12){multiplier = 1;}
+
+divisor=divisor/multiplier;
+
+var princ = accounting.unformat(document.getElementById("text1").value);
+var rate = (document.getElementById("text2").value / divisor) / 100;
+var num_pmts = accounting.unformat(document.getElementById("text3").value);
+var pmt = accounting.unformat(document.getElementById("text4").value);
+
+if (pmt == 0) { alert("Missing Payment"); return;}
+if (princ == 0) { alert("Missing Principal"); return;}
+if (num_pmts == 0) { alert("Missing number of Payments"); return;}
+
+//alert((t_rate/divisor)/100);
+
+while (i < 200) {
+  t_pmt = mymodule.getPmt(princ,(t_rate/divisor)/100,num_pmts);
+  //alert(t_pmt);
+  if (t_pmt == pmt) { break; }
+	if (t_pmt > pmt && direction == "down") {t_rate = t_rate-step; }
+	if (t_pmt > pmt && direction == "up") {step = step/2; var direction="down"; t_rate = t_rate - step; }
+
+	if (t_pmt < pmt && direction == "down") {step = step/2; var direction="up"; t_rate = t_rate + step; }
+	if (t_pmt < pmt && direction == "up") { t_rate = t_rate + step; }
+
+ 	i++;
+}
+ 
+rate = t_rate;
+document.getElementById("text1").value = accounting.formatNumber(princ,2);
+document.getElementById("text2").value = accounting.formatNumber(rate,4);
+//document.getElementById("text3").value = accounting.formatNumber(num_pmts);
+document.getElementById("text4").value = accounting.formatNumber(pmt,2);
+
+}
+
+function calcNumPmts() {
+var i=0,t_pmt=0;
+var t_num_pmts=100;
+var step=20;
+var direction="down";
+
+var divisor;
+divisor=1;
+
+divisor =document.getElementById("rateperiod").value;
+var pp = document.getElementById("pmtperyear").value;
+var multiplier;
+if (pp == 1){multiplier = 12;}
+if (pp == 4){multiplier = 3;}
+if (pp == 12){multiplier = 1;}
+
+divisor=divisor/multiplier;
+
+var princ = accounting.unformat(document.getElementById("text1").value);
+var rate = accounting.unformat(document.getElementById("text2").value);
+var num_pmts = accounting.unformat(document.getElementById("text3").value);
+var pmt = accounting.unformat(document.getElementById("text4").value);
+
+if (pmt == 0) { alert("Missing Payment"); return;}
+if (rate == 0) { alert("Missing Rate"); return;}
+if (princ == 0) { alert("Missing Principal"); return;}
+
+while (i < 200) {
+	t_pmt = mymodule.getPmt(princ,(rate/divisor)/100,t_num_pmts);
+        if (t_pmt == pmt) { break; }
+
+	if (t_pmt < pmt && direction == "up") {step = step/2; direction="down"; t_num_pmts = t_num_pmts-step; }
+	if (t_pmt < pmt && direction == "down") {t_num_pmts = t_num_pmts-step; }
+
+	if (t_pmt > pmt && direction == "up") {t_num_pmts = t_num_pmts + step; }
+	if (t_pmt > pmt && direction == "down") {step = step/2; direction="up"; t_num_pmts = t_num_pmts + step; }
+
+ 	i++;
+}
+
+var pp = document.getElementById("pmtperyear").value;
+var buff;
+if (pp == 1){buff = ' (Annual)';}
+if (pp == 4){buff = ' (Quarterly)';}
+if (pp == 12){buff = ' (Monthly)';}
+
+num_pmts = t_num_pmts;
+document.getElementById("text1").value = accounting.formatNumber(princ,2);
+document.getElementById("text2").value = accounting.formatNumber(rate,4);
+document.getElementById("text3").value = accounting.formatNumber(num_pmts) + buff;
+document.getElementById("text4").value = accounting.formatNumber(pmt,2);
+
+}
+
+/*
+function getPmt(p_princ, p_rate, p_num_pmts) {
+  var pmt = p_princ / ((Math.pow(1 + p_rate, p_num_pmts)-1 ) / (p_rate * Math.pow(1 + p_rate, p_num_pmts)));
+  //var pmt = 55;
+   
+  return pmt;
+  }
+*/
+
+function myLoad() {
+
+var x=document.getElementById("viewUID").innerHTML=sessionStorage.userid;
+document.getElementById("userid").value=sessionStorage.userid;
+document.getElementById("pmtperyear").value=12;
+
+
+if (typeof x === "undefined") {
+  window.location.replace("/entry")};
+
+  if (typeof x == "--") {
+  window.location.replace("/entry")};
+
+}
+
+function goToLoanMaster() {
+
+//window.location.replace("/LoanMaster");
+document.getElementById("myMenuForm").submit();
+
+}
+
+</script>
+
+</body>
+
+</html>
+
+
+
+

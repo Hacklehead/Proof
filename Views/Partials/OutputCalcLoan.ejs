@@ -1,0 +1,249 @@
+﻿
+<Style>
+#myTable_1 {
+  border-collapse: collapse;
+  
+  font-size: 14px;
+  font-family: arial;
+  border: 1px solid #ddd;
+}
+
+#myTable_1 th, #myTable_2 td {
+  text-align: left;
+  padding: 4px;
+  font-size: 14px;
+  font-family: arial;
+  border: 1px solid #ddd;
+}
+
+#myTable_1 td.right {
+  text-align: right;
+  padding: 4px;
+  border: 1px solid #ddd;
+}
+
+#myTable_1 td.left {
+  text-align: left;
+  padding: 4px;
+  border: 1px solid #ddd;
+}
+
+#myTable_1 td.center {
+  text-align: center;
+  padding: 4px;
+  border: 1px solid #ddd;
+}
+
+#myTable_1 tr.header {
+  background-color: #000080;
+  color: white;
+}
+
+#myTable_1 tr:hover {
+  background-color: #7979d2;
+  color: white;
+}
+
+#myTable_1 {
+    border-collapse: collapse;
+    
+}
+
+#myTable_1 th, td {
+    text-align: center;
+    padding: 4px;
+}
+
+#myTable_1 tr:nth-child(even) {background-color: #f2f2f2;}
+
+fieldset {
+    background-color: #f2f2f2;
+    width: 840px;
+    border: 1px solid black;   
+    text-align:left;
+}
+
+.fieldset_center {
+    background-color: #f2f2f2;
+    width: 640px;
+    border: 1px solid black;   
+    text-align:center;
+}
+
+
+.button {
+    border: 1px solid black;   
+    width: 200px;
+    height: 24px;
+    background-color: #008CBA;
+    color: white;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: #2196F3;
+}
+
+.grid-item {
+  background-color: #f2f2f2;
+  padding: 1px;
+  font-size: 16px;
+  text-align: center;
+}
+
+thead.fixedHeader tr {
+	position: relative;
+}
+
+
+html>body thead.fixedHeader {
+	display: table;
+	overflow: auto;
+	width: 100%
+}
+
+thead.fixedHeader tr {
+	position: relative;
+}
+
+html>body tbody.scrollContent {
+	display: block;
+	height: 380px;
+	overflow: auto;
+	width: 100%
+}
+
+div.ex1 {
+  
+  width: 1090px;
+  height: 400px;
+  overflow: scroll;
+}
+
+btn-group buttonx {
+background-color: #000080; /* Green background */
+border: 1px solid lightblue; /* Green border */
+color: white; /* White text */
+padding: 5px 24px; /* Some padding */
+cursor: pointer; /* Pointer/hand icon */
+width: 170px;
+float: left; /* Float the buttons side by side */
+font-weight: bold;
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+content: "";
+clear: both;
+display: table;
+}
+
+.btn-group button:not(:last-child) {
+border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+background-color: #3e8e41;
+}
+</Style>
+
+
+<div id="myModalOutputCalc" class="modal" >
+	<!-- Modal content -->
+	<div class="modal-content" style="width: 1130px;">
+	  <div class="modal-header">
+	  <span class="close">&times;</span>
+	  <h2 style="font-family:arial;">Loan Calculation Output</h2>
+	  </div>
+	  <br>
+        <div class="modal-body" style="width: 1050px; height: 460px;">
+          
+          <div class="btn-group">
+            <button style="width:175px; height:24px; text-align:center; background-color: #000080; border-color: lightblue; color: white;  padding: 2px 5px 2px 5px;" disabled>Date</button>
+            <button style="width:175px; height:24px; text-align:center; background-color: #000080; border-color: lightblue; color: white;  padding: 2px 5px 2px 5px;" disabled>Beginning Balance</button>
+            <button style="width:175px; height:24px; text-align:center; background-color: #000080; border-color: lightblue; color: white;  padding: 2px 5px 2px 5px;" disabled>Payment</button>
+            <button style="width:175px; height:24px; text-align:center; background-color: #000080; border-color: lightblue; color: white;  padding: 2px 5px 2px 5px;" disabled>Interest</button>
+            <button style="width:175px; height:24px; text-align:center; background-color: #000080; border-color: lightblue; color: white;  padding: 2px 5px 2px 5px;" disabled>Amortization</button>
+            <button style="width:175px; height:24px; text-align:center; background-color: #000080; border-color: lightblue; color: white;  padding: 2px 5px 2px 5px;" disabled>Ending Balance</button>
+          </div>
+
+        <div class="ex1">  
+				<table class="myTable_1" id="myTable_1" >
+            
+					  <tr class="header" hidden>
+					    <th style="width: 170px;">Date</th>
+					    <th style="width: 170px;">Beginning Balance</th>
+					    <th style="width: 170px;">Payment</th>
+					    <th style="width: 170px;">Interest</th>
+					    <th style="width: 170px;">Amortization</th>
+					    <th style="width: 170px;">Ending Balance</th>
+            </tr>
+                    
+				  </table>
+        </div>
+	  			<div class="row">
+				<div style="float: left; width: 50%;" >
+
+			</div>			  
+			</div><br><br>
+      </div>  
+    <button class="buttony button3" id="DoExcel" onclick="exportTableToExcel('myTable_1','loandata')"><strong>Export to Excel</strong></button>
+		<button class="buttony button3" id="DoCalc" onclick="doCancel()"><strong>Cancel</strong></button>
+		
+	</div>
+  </div> 
+<script>
+  function doCancel() {
+  modalOutputCalc.style.display = "none";
+}
+
+function exportTableToExcel(tableID, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(tableID);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'excel_data.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
+
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        
+        csv.push(row.join(","));        
+    }
+
+    // Download CSV file
+    downloadCSV(csv.join("\n"), filename);
+}
+</script>

@@ -1,0 +1,749 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>Loan Master</title>
+<link rel="icon" href="ps32.gif" type="image/gif" sizes="32x32">
+<meta http-equiv="content-type" content="text/plain; charset=UTF-8"/>
+
+</head>
+<link rel="stylesheet" href="main.css">
+<body onload="myLoad();" style="font-family:arial;">
+	  <div class="row">
+		<div class="column" style="border-top: 1px solid #ddd;font-family: arial; font-size: 24px; text-align: left; height:32px; background-color:#f2f2f2; color: #000080; padding: 4px 5px 2px 4px;">
+			<img src="PequaSoft.png" alt="Forest" style="width:125px">
+		</div>
+		<div class="column" style="border-top: 1px solid #ddd;font-family: arial; font-size: 24px; text-align: center; height:32px; background-color:#f2f2f2; color: #000080; padding: 4px 5px 2px 4px;">
+		  <strong>Loan Master</strong>
+		</div>
+		<div class="column" style="border-top: 1px solid #ddd;font-family: arial; font-size: 16px; text-align: right; height:32px; background-color:#f2f2f2; color: #000080; padding: 4px 5px 2px 4px;">
+		  <label style="color: blue" >User ID: </label><label id="viewUID" style="color: black" >...</label>
+		</div>
+	  </div>
+
+	  <div style="height:35px; background-color:#000080; padding: 2px 5px 2px 5px;">
+		<button id="GoToBackOffice" class="buttony button4" style="float: left; width: 250px; margin-right: 25px;" onclick="window.location.href='/Mainmenu'" ><strong>Main Menu</strong></button>
+		
+		<button id="GoToBackOffice" class="buttony button4" style="float: left; width: 250px; margin-right: 25px;" onclick="window.location.href='/Quickcalculator'" ><strong>Quick Loan Calculator</strong></button>
+	  </div>
+
+<br> <br> <br> 
+
+
+<section>
+  <nav style="float: left; width: 810px; height: 500px; " >
+
+  <button id="AddLoan" class="buttony button33" style="float: center; width: 147px;margin-right: 3px; " onclick="onAddLoan()"  ><strong>Add Loan</strong></button>
+  <button id="DeleteLoan" class="buttony button33" style="float: center; width: 146px;margin-right: 3px; " onclick="onDeleteLoan()" ><strong>Delete Loan</strong></button>
+  <button id="CopyLoan" class="buttony button33" style="float: center; width: 146px;margin-right: 3px; " onclick="onCopyLoan()" ><strong>Copy Loan</strong></button>
+  <button id="EditLoan" class="buttony button33" style="float: center; width: 147px;margin-right: 3px; " onclick="onEditLoan()" ><strong>Edit Loan</strong></button>
+  <button id="CalcLoan" class="buttony button33" style="float: center; width: 149px; " onclick="onCalcLoan()" ><strong>Calculate Loan</strong></button>
+  <br><br>
+
+	<table class="myTable_2" style="width: 100%;" id="myTable_2" >
+	
+		<thead class="fixedHeader">
+			<tr class="header">
+
+			<th width="160">Loan ID</th>
+			<th width="150">Start Date</th>
+			<th width="150">Balance</th>
+			<th width="150">Rate</th>
+			
+			<%if(dataSet.length < 16){ %>
+			    <% val = "150" %>
+				
+            <% } %>
+			<%if(dataSet.length >= 16){ %>
+				<% val = "166" %>
+            <% } %>
+						
+			<th width="<%= val %>"> Payment</th>
+			<th width="160" hidden>Num Pmts</th>			
+			<th width="160" hidden>Pmt/Year</th>			
+			<th width="160" hidden>RatePmt/Year</th>			
+			<th width="160" hidden>Method</th>			
+			</tr>
+		</thead>
+   
+	<tbody class="scrollContent" id="scroll">
+   
+	<% for (var i = 0; i < dataSet.length; i++) {  %>
+		<% buff=dataSet[i].balance; buff=buff.toString();var pattern = /(-?\d+)(\d{3})/g; buff = buff.replace(pattern, "$1,$2"); buff = buff.replace(pattern, "$1,$2"); buff = buff.replace(pattern, "$1,$2") %>
+		<% val = Number(dataSet[i].rate).toFixed(4) %>
+				
+		<tr onclick="myFunction(this)" ondblclick="onEditLoan()">
+		<td width="170"><%= dataSet[i].loanid %></td>
+		
+		<td class="right" width="161"><%= dataSet[i].StartDate %></td>
+		<td id="aa" class="right" width="161"><%= buff %></td>
+		
+		<td class="right" width="161"><%= val %></td>
+		<% buff=dataSet[i].payment; buff=buff.toString();var pattern = /(-?\d+)(\d{3})/g; buff = buff.replace(pattern, "$1,$2"); buff = buff.replace(pattern, "$1,$2"); buff = buff.replace(pattern, "$1,$2") %>
+		<td class="right" width="161"><%= buff %></td>
+
+		<td class="right" width="161" hidden><%= dataSet[i].numpmts %></td>
+		<td class="right" width="161" hidden><%= dataSet[i].Periodicity %></td>
+		<td class="right" width="161" hidden><%= dataSet[i].RatePeriodicity %></td>
+		<td class="right" width="161" hidden><%= dataSet[i].Method %></td>
+		</tr>  
+		
+		
+  <% } %>
+</tbody>		
+</table>
+	 </nav>
+
+	<article style="max-width: 400px; display: inline-block ">
+   
+	<p><font size="4" color="#000080"> <strong>Loan Thumbnail</strong></font></p>
+    <div style="float: left; width: 35%;" >	
+	<label style="color: blue" >Loan ID:</label><br><br>
+	<label style="color: blue" >Start Date:</label><br><br>
+	<label style="color: blue" >Pmts/Year:</label><br><br>	
+	<label style="color: blue" >Num Pmts:</label><br><br>
+	<label style="color: blue" >Balance:</label><br><br>
+	<label style="color: blue" >Rate:</label><br><br>
+	<label style="color: blue" >Payment:</label><br><br>
+	<label style="color: blue" >Method:</label><br><br>
+
+	</div>
+
+	<font size="3" color="black">
+    <div style="float: left; width: 65%;  border: none; " >	
+	<label style="color: black" id="loanid"></label><br><br>
+	<label style="color: black" id="startdate"></label><br><br>
+	<label style="color: black" id="pmtyear"></label><br><br>
+	<label style="color: black" id="numpmts"></label><br><br>
+	<label style="color: black" id="balance"></label><br><br>
+	<label style="color: black" id="rate"></label><br><br>
+	<label style="color: black" id="pmt"></label><br><br>
+	<label style="color: black" id="method"></label><br><br>
+	<label style="color: black" id="rateonly" hidden></label><br><br>
+	<label style="color: black" id="rateper" hidden></label><br><br>
+	
+
+	</div>		
+
+</article>
+</section>
+
+<%- include('partials/addloan') %>
+
+<%- include('partials/copyloan') %>
+
+<%- include('partials/deleteloan') %>
+
+<%- include('partials/editloan') %>
+
+<%- include('partials/numpmts2') %>
+
+<%- include('partials/setupCalcLoan') %>
+
+<%- include('partials/outputCalcLoan') %>
+
+<script src="accounting.js"></script>
+<script src="LoanCalc.js"></script>
+
+<script>
+
+var table;
+
+table = document.getElementById("myTable_1");
+
+var i,m,buff;
+
+//\d)(?=(\d{3})+(?!\d))/g
+var pattern = /(-?\d+)(\d{3})/;
+
+function myFunction() {
+
+  var input, filter, table, tr, td, i, x;
+
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+
+  x=document.getElementById("viewOption").innerHTML;
+
+  if (x == 'Collapse'){
+                table = document.getElementById("myTable_1");}
+                else{
+                table = document.getElementById("myTable_2");
+                }
+
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }      
+  }
+}
+
+function setViewOption() {
+
+}
+
+function myFunction(x) {
+//alert("Row index is: " + x.rowIndex);
+var status, table, tr, td, i, x;
+table = document.getElementById("myTable_2");
+tr = table.getElementsByTagName("tr");
+
+for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if(i == x.rowIndex) {tr[x.rowIndex].style.backgroundColor = 'yellow';}
+
+    if(td && i != x.rowIndex && (i % 2) != 0){tr[i].style.backgroundColor = '#f2f2f2';}
+    if(td && i != x.rowIndex && (i % 2) == 0){tr[i].style.backgroundColor = 'white';}
+  }
+
+
+var cell_1 = x.getElementsByTagName("td")[0];
+var cell_2 = x.getElementsByTagName("td")[1];
+var cell_3 = x.getElementsByTagName("td")[2];
+var cell_4 = x.getElementsByTagName("td")[3];
+var cell_5 = x.getElementsByTagName("td")[4];
+
+var cell_6 = x.getElementsByTagName("td")[5];
+var cell_7 = x.getElementsByTagName("td")[6];
+var cell_8 = x.getElementsByTagName("td")[7];
+var cell_9 = x.getElementsByTagName("td")[8];
+
+var id = cell_1.innerHTML;
+sessionStorage.currentloanid = id;
+
+var balance = cell_3.innerHTML;
+balance = balance.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+var rate = cell_4.innerHTML;
+rate =  Number(rate).toFixed(4);    
+
+var StartDate = cell_2.innerHTML;
+var numpmts = cell_6.innerHTML;
+var pmt = cell_5.innerHTML;
+var pmtyear = cell_7.innerHTML;
+var method = cell_9.innerHTML;
+
+document.getElementById("loanid").innerHTML=id;
+
+document.getElementById("balance").innerHTML= balance;  // accounting.formatNumber(balance,2);
+document.getElementById("rate").innerHTML=rate + ' (' + cell_8.innerHTML + ')'; 
+document.getElementById("rateonly").innerHTML=rate; 
+document.getElementById("rateper").innerHTML=cell_8.innerHTML; 
+
+document.getElementById("startdate").innerHTML=StartDate;
+document.getElementById("numpmts").innerHTML=numpmts;
+document.getElementById("pmt").innerHTML=pmt;
+document.getElementById("pmtyear").innerHTML=pmtyear;
+document.getElementById("method").innerHTML=method;
+
+document.getElementById("CopyLoan").disabled = false;
+document.getElementById("DeleteLoan").disabled = false;
+document.getElementById("EditLoan").disabled = false;
+document.getElementById("CalcLoan").disabled = false;
+
+}
+
+</script>
+
+<script>
+var modal = document.getElementById("myModalAdd");
+var modalCopy = document.getElementById("myModalCopy");
+var modalDelete = document.getElementById("myModalDelete");
+var modalEdit = document.getElementById("myModalEdit");
+var modalNumPmt = document.getElementById("myNumPmtsModal");
+var modalSetupCalc = document.getElementById("myModalSetupCalc");
+var modalOutputCalc = document.getElementById("myModalOutputCalc");
+
+var span = document.getElementsByClassName("close")[0];
+var span2 = document.getElementsByClassName("close")[1];
+var span3 = document.getElementsByClassName("close")[2];
+var span4 = document.getElementsByClassName("close")[3];
+var span5 = document.getElementsByClassName("close")[4];
+var span6 = document.getElementsByClassName("close")[5];
+var span7 = document.getElementsByClassName("close")[6];
+
+function myLoad() {
+
+sessionStorage.currentloanid = '--';
+document.getElementById("loanname").value = '--';
+var table = document.getElementById("myTable_2");
+var tr = table.getElementsByTagName("tr");
+var td, buff, i;
+
+var x=document.getElementById("viewUID").innerHTML=sessionStorage.userid;
+
+if (typeof x === "undefined") {
+  window.location.replace("/entry")};
+
+  if (typeof x == "--") {
+  window.location.replace("/entry")};
+
+  document.getElementById("CopyLoan").disabled = true;
+  document.getElementById("DeleteLoan").disabled = true;
+  document.getElementById("EditLoan").disabled = true;
+  document.getElementById("CalcLoan").disabled = true;
+
+}
+
+function onAddLoan(){
+	document.getElementById("userid").value = sessionStorage.userid;
+	
+	modal.style.display = "block";
+
+//alert('Add Loan');
+}
+
+function onCopyLoan(){
+
+document.getElementById("copyuserid").value = sessionStorage.userid;
+document.getElementById("srceloanname").value = sessionStorage.currentloanid;
+
+if(sessionStorage.currentloanid != '--'){modalCopy.style.display = "block";}
+
+//alert('Copy Loan');
+}
+
+function onDeleteLoan(){
+//alert('Delete Loan');
+
+	document.getElementById("deleteuserid").value = sessionStorage.userid;
+	document.getElementById("deleteloanname").value = sessionStorage.currentloanid;
+
+if(sessionStorage.currentloanid != '--'){modalDelete.style.display = "block";}
+
+}
+
+function onEditLoan(){
+	document.getElementById("edituserid").value = sessionStorage.userid;
+	
+	document.getElementById("editloanname").value = sessionStorage.currentloanid;
+	var buff = document.getElementById("startdate").innerHTML;
+	var buff2 = buff.substring(6,10) + '-' + buff.substring(0,2) + '-' + buff.substring(3,5)
+
+	//alert(document.getElementById("rateper").innerHTML);
+
+	document.getElementById("editstartdate").value = buff2;
+	document.getElementById("editpmtyear").value = document.getElementById("pmtyear").innerHTML;
+	document.getElementById("editrate").value = document.getElementById("rateonly").innerHTML;
+	document.getElementById("editrateper").value = document.getElementById("rateper").innerHTML;
+	document.getElementById("editbalance").value = document.getElementById("balance").innerHTML;
+	document.getElementById("editpayment").value = document.getElementById("pmt").innerHTML;
+	document.getElementById("editnumpmts").value = document.getElementById("numpmts").innerHTML;
+	document.getElementById("editnumpmts_num").value = document.getElementById("numpmts").innerHTML;
+	document.getElementById("editmethod").value = document.getElementById("method").innerHTML;
+	
+	if(sessionStorage.currentloanid != '--'){modalEdit.style.display = "block";}
+
+}
+
+function onCalcLoan(){
+	
+	document.getElementById("calcuserid").value = sessionStorage.userid;
+	document.getElementById("calcloanname").value = sessionStorage.currentloanid;
+	var buff = document.getElementById("startdate").innerHTML;
+	var buff2 = buff.substring(6,10) + '-' + buff.substring(0,2) + '-' + buff.substring(3,5)
+	document.getElementById("calcstartdate").value = buff2;	
+	document.getElementById("calc_pmtperyear").value = document.getElementById("pmtyear").innerHTML;
+
+	document.getElementById("calc_np").value = document.getElementById("numpmts").innerHTML;
+	
+	if(sessionStorage.currentloanid != '--'){modalSetupCalc.style.display = "block";}
+
+}
+
+function SendAddLoan(parSwitch) {
+var table = document.getElementById("scroll");
+var tr = table.getElementsByTagName("tr");
+var td;
+var buff,i;
+
+if (parSwitch == 0){modal.style.display = "none";}
+sessionStorage.newloan = document.getElementById("loanname").value;
+
+for (i = 0; i < tr.length; i++) {
+	td = tr[i].getElementsByTagName("td")[0];
+  	buff=td.innerHTML.toString();
+	//alert(buff.toString());
+	if (buff == sessionStorage.newloan) {
+	alert(sessionStorage.newloan + ' already exists');
+  	}      
+	}
+}
+
+function SendCopyLoan(parSwitch) {
+var table = document.getElementById("scroll");
+var tr = table.getElementsByTagName("tr");
+var td;
+var buff,i;
+
+if (parSwitch == 0){modal.style.display = "none";}
+sessionStorage.newloan = document.getElementById("copyloanname").value;
+
+for (i = 0; i < tr.length; i++) {
+  	td = tr[i].getElementsByTagName("td")[0];
+  	buff=td.innerHTML.toString();
+  	if (buff == sessionStorage.newloan) {
+	alert(sessionStorage.newloan + ' already exists');
+  		}      
+	}
+}
+
+function doCalc(parSwitch) {
+	
+	var numpmts = parseInt(document.getElementById("numpmts").innerHTML);
+	var currbalance=accounting.unformat(document.getElementById("balance").innerHTML);	
+	var rate=parseFloat(document.getElementById("rateonly").innerHTML);
+	var rateper=document.getElementById("rateper").innerHTML;
+	var pmtyear= document.getElementById("pmtyear").innerHTML;
+	var method= document.getElementById("method").innerHTML;
+	var buff = document.getElementById("startdate").innerHTML;
+	var startdate = new Date(buff);
+	
+	//calcstartdate
+	
+	var d_numpmts = parseInt(document.getElementById("calc_np").value);
+	buff = document.getElementById("calcstartdate").value;
+	var d_startdate = new Date(buff);
+	d_startdate.setTime( d_startdate.getTime() + d_startdate.getTimezoneOffset()*60*1000 );
+	
+	var d_rateper=document.getElementById("calc_pmtperyear").value;
+
+	
+	if(parSwitch == 0) {modalSetupCalc.style.display = "none";}
+	else{
+		
+		//alert(pmtyear);
+		mymodule.doOutputLoan(outputSet,numpmts,currbalance,rate,rateper,startdate,method,pmtyear);
+		setupOutputDisplay(displaySet,outputSet,numpmts,pmtyear,startdate,d_numpmts,d_rateper,d_startdate);
+		//doOutputDisplay(outputSet);
+		doOutputDisplay(displaySet);
+		modalOutputCalc.style.display = "block";}
+
+}
+
+function SendEditLoan(parSwitch) {
+var table = document.getElementById("scroll");
+var tr = table.getElementsByTagName("tr");
+var td;
+var buff,buff2,i;
+
+if (parSwitch == 0){modal.style.display = "none";}
+
+buff=accounting.unformat(document.getElementById("editbalance").value);
+document.getElementById("editbalance").value = buff;
+
+buff=accounting.unformat(document.getElementById("editpayment").value);
+document.getElementById("editpayment").value = buff;
+
+buff=accounting.unformat(document.getElementById("editrate").value);
+document.getElementById("editrate").value = buff;
+
+buff=accounting.unformat(document.getElementById("editstartdate").value);
+buff2 = buff.substring(6,9) + '-' + buff.substring(0,1) + '-' + buff.substring(3,4)
+document.getElementById("editstartdate").value = buff2;
+alert('submit');
+
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+span2.onclick = function() {
+  modalCopy.style.display = "none";
+}
+
+span3.onclick = function() {
+  modalDelete.style.display = "none";
+}
+
+span4.onclick = function() {
+  modalEdit.style.display = "none";
+}
+
+span5.onclick = function() {
+	modalNumPmt.style.display = "none";
+}
+
+span6.onclick = function() {
+	modalSetupCalc.style.display = "none";
+}
+
+span7.onclick = function() {
+	modalOutputCalc.style.display = "none";
+}
+
+var outputSet = [];
+var displaySet = [];
+
+function setupOutputDisplay(parOutputSet,parSourceSet,parNumPmts,parRatePer,parStartDate,dis_numpmts,dis_rateper,dis_startdate){
+
+var buff, mm, dd, yyyy, sDateBuff, sDisDateBuff;
+var ptr_src,end_pt;
+var openbalance,calc_pmt,pmt,int,amort,currbalance;
+buff = document.getElementById("startdate").innerHTML;
+var dtBuff;
+
+dtBuff = new Date(buff);
+buff= dtBuff.toLocaleDateString();
+var startdate = new Date(buff);
+
+mm=startdate.getMonth()+1;
+dd=startdate.getDate();
+yyyy=startdate.getFullYear();
+
+sDateBuff=mm+'/'+dd+'/'+yyyy;
+
+dtBuff = new Date(dis_startdate);
+buff= dtBuff.toLocaleDateString();
+startdate = new Date(buff);
+var prevdate = new Date(buff);
+
+mm=startdate.getMonth()+1;
+dd=startdate.getDate();
+yyyy=startdate.getFullYear();
+sDisDateBuff=mm+'/'+dd+'/'+yyyy;
+
+var dtStep = 1;
+if(dis_rateper == 'Annual'){dtStep = 12;}
+if(dis_rateper == 'Quarterly'){dtStep = 3;}
+
+var dtCalcStep = 1;
+if(parRatePer == 'Annual'){dtCalcStep = 12;}
+if(parRatePer == 'Quarterly'){dtCalcStep = 3;}
+
+var dpertype='summary';
+if(dtCalcStep > dtStep){dpertype='stretch';}
+
+//alert(dpertype);
+
+var currdate;
+var nextdate;
+prevdate.setMonth(prevdate.getMonth() - dtStep);
+
+dtBuff = new Date(dis_startdate);
+buff= dtBuff.toLocaleDateString();
+startdate = new Date(buff);
+
+var table = document.getElementById("myTable_1");
+var i,m;
+var endsrc_pt = parSourceSet.length;
+
+var dtype='summary';
+end_pt = dis_numpmts;
+
+if (parNumPmts == dis_numpmts && parRatePer == dis_rateper && sDateBuff == sDisDateBuff){
+	end_pt = parSourceSet.length;
+	dtype='natural';
+}
+
+//alert(dtype);
+
+while (parOutputSet.length) {
+            parOutputSet.pop();
+          }
+
+if(dtype == 'natural'){
+	for (i = 0; i < end_pt; i++) {
+		mm=startdate.getMonth()+1;
+		dd=startdate.getDate();
+		yyyy=startdate.getFullYear();
+		sDateBuff=mm+'/'+dd+'/'+yyyy;
+
+		buff=parSourceSet[i][0];
+		currdate= new Date(buff);
+		
+		openbalance=parSourceSet[i][1];
+		pmt=parSourceSet[i][2];
+		int=parSourceSet[i][3];
+		amort=parSourceSet[i][4];
+		currbalance=parSourceSet[i][5];
+
+		parOutputSet.push([sDateBuff,openbalance,pmt,int,amort,currbalance]);
+	
+		prevdate = startdate;
+		startdate.setMonth(startdate.getMonth() +dtStep);
+		}
+	}	
+
+	openbalance=0;
+	pmt=0;
+	int=0;
+	amort=0;
+	currbalance=0;
+	ptr_src=0;
+
+	if(dtype == 'summary' && dpertype == 'summary'){
+		
+		for (i = 0; i < end_pt; i++) {
+			mm=startdate.getMonth()+1;
+			dd=startdate.getDate();
+			yyyy=startdate.getFullYear();
+			sDateBuff=mm+'/'+dd+'/'+yyyy;
+
+			//alert(ptr_src);
+			if(ptr_src < endsrc_pt){
+				buff=parSourceSet[ptr_src][0];
+				currdate= new Date(buff);
+			}
+					
+			while(currdate <= startdate && ptr_src < endsrc_pt){
+			
+				if(currdate <= startdate && currdate > prevdate){
+			
+					openbalance=parSourceSet[ptr_src][1];
+					pmt=pmt+parSourceSet[ptr_src][2];
+					int=int+parSourceSet[ptr_src][3];
+					amort=amort+parSourceSet[ptr_src][4];
+					currbalance=parSourceSet[ptr_src][5];
+				}
+				ptr_src=ptr_src+1;
+				if(ptr_src < endsrc_pt){buff=parSourceSet[ptr_src][0];}
+				currdate= new Date(buff);
+							
+			}
+			
+			parOutputSet.push([sDateBuff,openbalance,pmt,int,amort,currbalance]);
+	
+			openbalance=0;
+			pmt=0;
+			int=0;
+			amort=0;
+			currbalance=0;
+
+			startdate.setMonth(startdate.getMonth() +dtStep);
+			prevdate.setMonth(prevdate.getMonth() +dtStep);
+
+		}
+	}		
+
+	if(dtype == 'summary' && dpertype == 'stretch'){
+		//alert('stretch');		
+		//alert(end_pt);		
+		//alert(dpertype);		
+		//startdate.setMonth(startdate.getMonth() +dtStep);
+		for (i = 0; i < end_pt; i++) {
+		mm=startdate.getMonth()+1;
+		dd=startdate.getDate();
+		yyyy=startdate.getFullYear();
+		sDateBuff=mm+'/'+dd+'/'+yyyy;
+
+		//buff=parSourceSet[ptr_src][0];
+		if(ptr_src < endsrc_pt){buff=parSourceSet[ptr_src][0];}
+		currdate= new Date(buff);
+		
+		while(currdate <= startdate && ptr_src < endsrc_pt){
+
+			if(currdate <= startdate ){
+			openbalance=parSourceSet[ptr_src][1];
+			pmt=pmt+parSourceSet[ptr_src][2];
+			int=int+parSourceSet[ptr_src][3];
+			amort=amort+parSourceSet[ptr_src][4];
+			currbalance=parSourceSet[ptr_src][5];
+
+			}
+			ptr_src=ptr_src+1;
+			if(ptr_src < endsrc_pt){buff=parSourceSet[ptr_src][0];}
+			
+			currdate= new Date(buff);
+
+		}
+
+		parOutputSet.push([sDateBuff,openbalance,pmt,int,amort,currbalance]);
+
+		//openbalance=parSourceSet[ptr_src][5];
+		if(ptr_src > 0 ){openbalance=currbalance;}
+		
+		pmt=0;
+		int=0;
+		amort=0;
+		//openbalance=
+		startdate.setMonth(startdate.getMonth() +dtStep);
+		prevdate.setMonth(prevdate.getMonth() +dtStep);
+
+	//if(i == 1){alert('start date-'+startdate);}
+	//if(i == 1){alert('prev date-'+prevdate);}
+		}
+	}		
+
+}
+
+
+function doOutputDisplay(parOutputSet){
+
+var buff, mm, dd, yyyy, sDateBuff;
+buff = document.getElementById("startdate").innerHTML;
+
+//var startdate = new Date(buff);
+
+var table = document.getElementById("myTable_1");
+var i,m;
+
+if(table.rows.length > 1){
+	//alert(table.rows.length);	
+	for(var i = table.rows.length-1; i > 0;i--){
+		table.deleteRow(1);
+	}
+	//alert('Table cleared');	
+}
+
+
+for (i = 0; i < parOutputSet.length; i++) {
+	
+
+    var row = table.insertRow(i+1);
+
+ 	    row.style.borderColor = "black";
+		row.style.borderWidth = "1px";
+		row.borderStyle = "solid";
+		
+	for (m = 0; m < parOutputSet[0].length; m++) {	
+		var cell1 = row.insertCell(m);
+		
+		if(m==0){cell1.classList.add("center");}
+		if(m>=1){cell1.classList.add("right");}
+
+		if(m == 0){cell1.innerHTML = parOutputSet[i][0];} 
+		if(m == 1){cell1.innerHTML = accounting.formatNumber(parOutputSet[i][1],2);}
+		if(m == 2){cell1.innerHTML = accounting.formatNumber(parOutputSet[i][2],2);}
+		if(m == 3){cell1.innerHTML = accounting.formatNumber(parOutputSet[i][3],2);}
+		if(m == 4){cell1.innerHTML = accounting.formatNumber(parOutputSet[i][4],2);}
+		if(m == 5){cell1.innerHTML = accounting.formatNumber(parOutputSet[i][5],2);}
+
+		cell1.style.width = "175px";
+		}
+	
+	}
+	
+}
+
+</script>
+ 
+
+<style>
+
+#myTable_1 tr:hover {
+
+  background-color: #7979d2;
+
+  color: white;
+
+}
+
+</style>
+
+ 
+
+</body>
+
+</html>
+
+ 

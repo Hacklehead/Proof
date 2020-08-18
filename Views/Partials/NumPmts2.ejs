@@ -1,0 +1,67 @@
+﻿<div id="myNumPmtsModal" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content">
+	  <div class="modal-header">
+	  <span class="close">&times;</span>
+	  <h2 style="font-family:arial;">Number of Payments</h2>
+	  </div>
+	  <br>
+	  <div class="modal-body">
+	  <div class="row">
+		<div class="column" >
+			<p><label id="rundate" style="font-family:arial; padding-bottom: 10px;" for="demo">Number of Years:</label><br></p>
+			<p></p><label id="rundate" style="font-family:arial;" for="demo">Payments Per Year:</label><br></p>
+			<label id="rundate" style="font-family:arial;" for="demo">Number of Payments:</label> 
+		</div> 
+		<div class="column"  style="padding-bottom: 3px;">
+			<p><input type="text" id="np_text5" onkeyup="CalcModalNumPmts()" name="num_years" style="width:175px;"></p>
+			<p><select name="np_pmtperyear" id="np_pmtperyear" onchange="CalcModalNumPmts()" style="width:175px;" >
+			  <option value="12">Monthly</option>  
+			  <option value="4">Quarterly</option>
+			  <option value="1">Annual</option>  
+			  </select><br></p>
+			  <input type="text" id="np_text6" name="np_text6" style="width:175px;">
+		</div>
+	  </div><br><br>
+	</div>
+	<button class="buttony button3" id="sendbackpmts" onclick="SendBackPmts(1)"><strong>Submit</strong></button>
+	<button class="buttony button3" id="sendbackpmts" onclick="SendBackPmts(0)"><strong>Cancel</strong></button><br>
+	</div>
+  </div>
+
+<Script>
+
+var modal_num = document.getElementById("myNumPmtsModal");
+var span_num = document.getElementsByClassName("close")[0];
+
+
+function SendBackPmts(parSwitch) {
+	if (parSwitch == 1){
+	  var pp = document.getElementById("np_pmtperyear").value;
+	  var buff,buff2;
+	  if (pp == 1){buff = ' (Annual)';buff2 = 'Annual';}
+	  if (pp == 4){buff = ' (Quarterly)';buff2 = 'Quarterly';}
+	  if (pp == 12){buff = ' (Monthly)';buff2 = 'Monthly';}
+  
+	  document.getElementById("editnumpmts_num").value = document.getElementById("np_text6").value;
+	  document.getElementById("editnumpmts").value = document.getElementById("np_text6").value + buff;
+	  document.getElementById("editpmtyear").value = buff2;
+	  
+
+	  }
+	  modal_num.style.display = "none";
+  }
+
+  span_num.onclick = function() {
+  modal_num.style.display = "none";
+}
+
+function CalcModalNumPmts() {
+	//alert('Calc num pmts');
+  var numYears = accounting.unformat(document.getElementById("np_text5").value);
+  var pmtperyear =document.getElementById("np_pmtperyear").value;
+  var totalpmts=numYears*pmtperyear;
+  document.getElementById("np_text6").value =totalpmts;
+}
+
+</Script>

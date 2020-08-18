@@ -1,0 +1,30 @@
+﻿<div id="myNumPmtsModal" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content">
+	  <div class="modal-header">
+	  <span class="close">&times;</span>
+	  <h2 style="font-family:arial;">Number of Payments</h2>
+	  </div>
+	  <br>
+	  <div class="modal-body">
+	  <div class="row">
+		<div class="column" >
+			<p><label id="rundate" style="font-family:arial; padding-bottom: 10px;" for="demo">Number of Years:</label><br></p>
+			<p></p><label id="rundate" style="font-family:arial;" for="demo">Payments Per Year:</label><br></p>
+			<label id="rundate" style="font-family:arial;" for="demo">Number of Payments:</label> 
+		</div> 
+		<div class="column"  style="padding-bottom: 3px;">
+			<p><input type="text" id="text5" onkeyup="CalcModalNumPmts()" name="num_years" style="width:175px;"><br></p>
+			<p><select name="pmtperyear" id="pmtperyear" onchange="CalcModalNumPmts()" style="width:175px;" >
+			  <option value="12">Monthly</option>  
+			  <option value="4">Quarterly</option>
+			  <option value="1">Annual</option>  
+			  </select><br></p>
+			  <input type="text" id="text6" name="num_pmts" style="width:175px;">
+		</div>
+	  </div><br><br>
+	</div>
+	<button class="buttony button3" id="sendbackpmts" onclick="SendBackPmts(1)"><strong>Submit</strong></button>
+	<button class="buttony button3" id="sendbackpmts" onclick="SendBackPmts(0)"><strong>Cancel</strong></button><br>
+	</div>
+  </div>

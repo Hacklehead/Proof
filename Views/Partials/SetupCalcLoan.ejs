@@ -1,0 +1,91 @@
+﻿
+<Style>
+fieldset {
+    background-color: #f2f2f2;
+    width: 440px;
+    border: 1px solid black;   
+    text-align:left;
+}
+
+.fieldset_center {
+    background-color: #f2f2f2;
+    width: 440px;
+    border: 1px solid black;   
+    text-align:center;
+}
+
+
+.button {
+    border: 1px solid black;   
+    width: 200px;
+    height: 24px;
+    background-color: #008CBA;
+    color: white;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: #2196F3;
+}
+
+.grid-item {
+  background-color: #f2f2f2;
+  padding: 1px;
+  font-size: 16px;
+  text-align: center;
+}
+</Style>
+
+<div id="myModalSetupCalc" class="modal" >
+	<!-- Modal content -->
+	<div class="modal-content" style="width: 660px;">
+	  <div class="modal-header">
+	  <span class="close">&times;</span>
+	  <h2 style="font-family:arial;">Calculate a Loan</h2>
+	  </div>
+	  <br>
+	  
+		  	<div class="modal-body" style="width: 850px; height: 200px;">
+	  			<div class="row">
+				<div style="float: left; width: 155px;" >
+					
+				<select name="calcitpmtyear" id="calcpmtyear" style="width:175px; height: 22px; " hidden>
+					<option value="Annual">Annual</option>
+					<option value="Monthly">Monthly</option>
+					<option value="Quarterly">Quarterly</option>
+				</select>
+
+			<fieldset class="fieldset" style="width: 560px; ">
+				<div style="float: left; width: 50%; padding-left: 20px;" >	
+					<label style="color: black; font-family: arial;">User Name: </label><br />
+					<label style="color: black; font-family: arial;">Loan Name: </label><br />
+					<label style="color: black; font-family: arial;">Start Date: </label><br />
+					<label style="color: black; font-family: arial;">Output: </label><br />
+					<label style="color: black; font-family: arial;">Number of Payments: </label><br />					
+			    </div>	
+
+			    <div style="float: left; width: 50%; padding-left: 20px;" >	
+					<input type="text" id="calcuserid"  name="calcuserid" style="width:250px; " readonly><br>
+					<input type="text" id="calcloanname" name="calcloanname" style="width:250px;" readonly><br>
+					<input type="date" id="calcstartdate" name="calcstartdate" style="width:250px; font-family: arial;" ><br>
+					<select name="calc_pmtperyear" id="calc_pmtperyear" style="width:250px;" >
+						<option value="Monthly">Monthly</option>  
+						<option value="Quarterly">Quarterly</option>
+						<option value="Annual">Annual</option>  
+						</select><br>
+						<input type="text" id="calc_np" name="calc_np" style="width:250px;">
+				   
+				</div>
+			  
+			  </fieldset><br><br>
+			</div>			  
+			</div><br><br>
+			</div>  
+			<br>
+		<button class="buttony button3" id="doCalc" onclick="doCalc(1)"><strong>Process</strong></button>
+		<button class="buttony button3" id="doCalc" onclick="doCalc(0)"><strong>Cancel</strong></button>
+		
+	
+	</div>
+  </div> 

@@ -1,0 +1,28 @@
+﻿
+
+<div id="myModalAdd" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content">
+	  <div class="modal-header">
+	  <span class="close">&times;</span>
+	  <h2 style="font-family:arial;">Add a Loan</h2>
+	  </div>
+	  <br>
+	  <form action="/newloan" method="POST" id="myNewLoan" >
+		  	<div class="modal-body">
+	  			<div class="row">
+					<div class="column" >
+					<p><label id="rundate" style="font-family:arial; padding-bottom: 10px;" for="demo">User Name:</label><br></p>		
+					<p><label id="rundate" style="font-family:arial; padding-bottom: 10px;" for="demo">Loan Name:</label><br></p>
+				</div> 
+				<div class="column"  style="padding-bottom: 3px;">
+					<p><input type="text" id="userid"  name="userid" style="width:175px;" readonly><br></p>
+					<p><input type="text" id="loanname"  name="loanname" style="width:175px;"><br></p>
+				</div>
+	  			</div><br><br>
+			</div>
+		<button class="buttony button3" id="sendbackpmts" onclick="SendAddLoan(1)"><strong>Submit</strong></button>
+		
+	</form>
+	</div>
+  </div> 

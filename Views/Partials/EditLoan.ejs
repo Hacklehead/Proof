@@ -1,0 +1,152 @@
+﻿
+<Style>
+fieldset {
+    background-color: #f2f2f2;
+    width: 540px;
+    border: 1px solid black;   
+    text-align:left;
+}
+
+.fieldset_center {
+    background-color: #f2f2f2;
+    width: 540px;
+    border: 1px solid black;   
+    text-align:center;
+}
+
+
+.button {
+    border: 1px solid black;   
+    width: 200px;
+    height: 24px;
+    background-color: #008CBA;
+    color: white;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  background-color: #2196F3;
+}
+
+.grid-item {
+  background-color: #f2f2f2;
+  padding: 1px;
+  font-size: 16px;
+  text-align: center;
+}
+</Style>
+
+<div id="myModalEdit" class="modal">
+	<!-- Modal content -->
+	<div class="modal-content" style="width: 660px;">
+	  <div class="modal-header">
+	  <span class="close">&times;</span>
+	  <h2 style="font-family:arial;">Edit a Loan</h2>
+	  </div>
+	  <br>
+	  <form action="/editloan" method="POST" id="myEditLoan" onsubmit="doBoink()">
+		  	<div class="modal-body" style="width: 550px; height: 320px;">
+	  			<div class="row">
+				<div style="float: left; width: 50%;" >
+					
+				<select name="editpmtyear" id="editpmtyear" style="width:175px; height: 22px; " hidden>
+					<option value="Annual">Annual</option>
+					<option value="Monthly">Monthly</option>
+					<option value="Quarterly">Quarterly</option>
+				</select>
+
+			<fieldset class="fieldset" style="width: 600px;">
+				<div style="float: left; width: 50%; padding-left: 20px;" >	
+					<label style="color: black; font-family: arial;">User Name: </label><br />
+					<label style="color: black; font-family: arial;">Loan Name: </label><br />
+					<label style="color: black; font-family: arial;">Start Date: </label><br />
+					<label style="color: black; font-family: arial;">Balance: </label><br />
+					<label style="color: black; font-family: arial;">Rate: </label><br />
+                	<label style="color: black; font-family: arial;">Num of Payments: </label><br />
+					<label style="color: black; font-family: arial;">Payment: </label><br />
+					<label style="color: black; font-family: arial;">Method: </label><br />
+			    </div>	
+
+			    <div style="float: left; width: 50%; padding-left: 20px;" >	
+					<input type="text" id="edituserid"  name="edituserid" style="width:250px; " readonly><br>
+					<input type="text" id="editloanname" name="editloanname" style="width:250px;" readonly><br>
+					<input type="date" id="editstartdate" name="editstartdate" style="width:250px; font-family: arial;" ><br>
+					<input type="text" id="editbalance"  name="editbalance" style="width:250px;"><br>
+					<input type="text" id="editrate"  name="editrate" style="width:153px;">
+					<select name="editrateper" id="editrateper" >
+					  <option value="Annual">per Year</option>
+					  <option value="Monthly">per Month</option>
+					  <option value="Quarterly">per Quarter</option>
+					</select><br />
+					<input type="text" id="editnumpmts" class="editnumpmts"   style="width: 205px;" onfocus="doPopup()" placeholder="# of Payments..." readonly>
+					<input type="text" id="fakebutton" class="editnumpmts" style="width: 40px; text-align:center; font-weight: bold;" onfocus="doPopup()" value="..." readonly>
+					<br />
+					<input type="text" id="editnumpmts_num" name="editnumpmts_num"   style="width: 205px;" hidden >
+					<input type="text" id="editpmtperyear" name="editpmtperyear"   style="width: 205px;" hidden >
+			  
+					<input type="text" id="editpayment"name="editpayment" style="width: 250px;" placeholder="Payment..." ><br />
+					<select name="editmethod" id="editmethod" style="width:250px;">
+						<option value="Constant Payment">Constant Payment</option>
+						<option value="Constant Amortization">Constant Amortization</option>
+						<option value="Interest Only">Interest Only</option>
+						<option value="Balloon Payment">Balloon Payment</option>
+					  </select><br />
+				   
+				</div>
+			  
+			  </fieldset><br><br>
+			</div>			  
+			</div><br><br>
+			</div>  
+		<button class="buttony button3" id="sendbackpmts" onclick="SendEditLoan(1)"><strong>Submit</strong></button>
+		
+	</form>
+	</div>
+  </div> 
+
+    <script>
+
+    var modalNumPmt = document.getElementById("myNumPmtsModal");
+	var span = document.getElementsByClassName("close")[0];
+	
+	function doPopup() {
+		var buff = document.getElementById("editnumpmts_num").value;
+		//alert(buff);
+		document.getElementById("np_text6").value = buff;
+		modalNumPmt.style.display = "block";
+	}
+
+	function doPopupNew() {
+		modalNumPmt.style.display = "block";
+		
+		var table = document.getElementById("scroll");
+var tr = table.getElementsByTagName("tr");
+var td;
+var buff,buff2,i;
+
+if (parSwitch == 0){modal.style.display = "none";}
+
+buff=accounting.unformat(document.getElementById("editbalance").value);
+document.getElementById("editbalance").value = buff;
+
+buff=accounting.unformat(document.getElementById("editpayment").value);
+document.getElementById("editpayment").value = buff;
+
+buff=accounting.unformat(document.getElementById("editstartdate").value);
+buff2 = buff.substring(6,9) + '-' + buff.substring(0,1) + '-' + buff.substring(3,4)
+document.getElementById("editstartdate").value = buff2;
+alert('submit');
+
+
+	}
+
+	function doBoink() {
+		//alert('Boink');
+	}
+	 
+	span.onclick = function() {
+		modalNumPmt.style.display = "none";
+	}
+
+  </script>

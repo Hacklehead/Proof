@@ -1,0 +1,28 @@
+﻿	 <div id="myModalCopy" class="modal">
+		<!-- Modal content -->
+		<div class="modal-content">
+		  <div class="modal-header">
+		  <span class="close">&times;</span>
+		  <h2 style="font-family:arial;">Copy a Loan</h2>
+		  </div>
+		  <br>
+		  <form action="/copyloan" method="POST" id="myCopyLoan" >
+				  <div class="modal-body">
+					  <div class="row">
+						<div class="column" >
+						<p><label id="rundate" style="font-family:arial; padding-bottom: 10px;" for="demo">User Name:</label><br></p>		
+						<p><label id="rundate" style="font-family:arial; padding-bottom: 10px;" for="demo">Source Loan Name:</label><br></p>
+						<p><label id="rundate" style="font-family:arial; padding-bottom: 10px;" for="demo">Destination Loan Name:</label><br></p>
+					</div> 
+					<div class="column"  style="padding-bottom: 3px;">
+						<p><input type="text" id="copyuserid"  name="copyuserid" style="width:175px;" readonly><br></p>
+						<p><input type="text" id="srceloanname"  name="srceloanname" style="width:175px;"><br></p>
+						<p><input type="text" id="destloanname"  name="destloanname" style="width:175px;"><br></p>
+					</div>
+					  </div><br><br>
+				</div>
+			<button class="buttony button3" id="sendbackpmts" onclick="SendCopyLoan(1)"><strong>Submit</strong></button>
+		
+		</form>
+		</div>
+	  </div>
