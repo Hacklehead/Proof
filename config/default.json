@@ -1,0 +1,35 @@
+{
+"Database": {
+
+    "loan": {
+      "driver": "msnodesqlv8",
+      "connectionString":"Driver={SQL Server Native Client 11.0};Server=184.168.194.77;Database=orange;user:=Hacklehead;password=Fairview.1;Trusted_Connection={yes};"
+    },
+
+    "mrptdb": {
+
+      "driver": "msnodesqlv8",
+
+      "connectionString":"Driver={SQL Server Native Client 11.0};Server=MCOPSQMRPT;Database=mrptdb;Trusted_Connection={yes};"
+
+    },
+
+    "audit": {
+
+      "driver": "msnodesqlv8",
+
+      "connectionString":"Driver={SQL Server Native Client 11.0};Server=MCOPSQ3P05;Database=cognos_db_11_audit;Trusted_Connection={yes};"
+
+    },
+
+    "tidal": {
+
+      "driver": "msnodesqlv8",
+
+      "connectionString":"Driver={SQL Server Native Client 11.0};Server=MCODSQ3P02;Database=Admiral62;Trusted_Connection={yes};"
+
+    }
+
+  }
+}
+
